@@ -72,6 +72,7 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
+    "deploy": "gatsby build && gh-pages -d public -b deploy",
     "develop": "gatsby develop",
     "dev": "npm run develop",
     "serve": "gatsby serve",
