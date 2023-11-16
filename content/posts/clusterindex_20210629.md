@@ -11,9 +11,6 @@ tags:
     - mysql
     - db
 ---
-+ 2021-05-11 : 커버링 vs 클러스터 차이 추가
-+ 
-<img src="https://images.velog.io/images/ggomjae/post/7f4a834f-689f-4cdd-be10-9b563d130503/image.png" width="100%"  alt=""/>
 
 ## 시작
 
@@ -86,4 +83,8 @@ NonClusterIndex 같은 경우에는 보통 우리가 했던 GenerationType.IDENT
 
 ## 끝내며
 나는 이번 신입 사원 프로젝트로 후후 통계 프로젝트를 했다. Spring Batch를 이용하여 통계낸 것을 Api Module에서 통계값을 가져와 통계 그래프와 결과를 보여주는 프로젝트다. 이러한 프로젝트를 통해서 Non Cluster Index, Cluster Index를 알았고 그 과정속에서 Index에 대한 깊이를 조금은 들어왔다고 생각한다. 굉장히 배울점이 많아서 좋았던 프로젝트였고 더 나아가 Group By에 대한 이슈가 있었으므로 그 부분또한 추후에 포스팅을 할 예정이다.
+
+2021-05-11 : 커버링 vs 클러스터 차이 추가
+<img src="https://images.velog.io/images/ggomjae/post/7f4a834f-689f-4cdd-be10-9b563d130503/image.png" width="100%"  alt=""/>
+
 
