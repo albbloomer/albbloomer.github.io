@@ -4,7 +4,8 @@ title: "Cluster Index vs Non-Cluster Index 이론 및 성능 비교 ( JPA + MYSQ
 cover: "../images/스크린샷 2023-11-16 오후 2.22.58.png"
 description: "this is a description"
 date: "2021-06-28T20:31:00Z"
-slug: "big-sample-test-1"
+slug: "clusterindex_20210629"
+keywords: "pig"
 categories: 
     - db
 tags:
