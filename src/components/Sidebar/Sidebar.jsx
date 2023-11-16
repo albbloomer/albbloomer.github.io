@@ -13,7 +13,7 @@ const Sidebar = ({ tagList, categoryList, latestPostEdges, links }) => {
         config.sidebarSticky ? "height-full" : ""
       }`}
     >
-      <WidgetSearch />
+      {/*<WidgetSearch />*/}
 
       {latestPostEdges && (
         <WidgetLatestPosts latestPostEdges={latestPostEdges} />
