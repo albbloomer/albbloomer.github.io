@@ -1,6 +1,6 @@
 const config = {
   // Site info
-  siteTitle: "율 블로그", // Site title.
+  siteTitle: "율로그", // Site title.
   siteTitleShort: "GB Template", // Short site title for homescreen (PWA). Preferably should be under 12 characters to prevent truncation.
   siteTitleAlt: "Gatsby Blog Template", // Alternative site title for SEO.
   siteLogo: "/logos/logo-1024x1024.png", // Logo used for SEO and manifest.
