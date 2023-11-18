@@ -1,3 +1,19 @@
+---
+template: "post"
+title: "Collect, Collector, Collectors 정리"
+cover: "../images/스크린샷 2023-11-18 오후 7.15.10.png"
+description: "this is a description"
+date: "2022-03-03T22:31:00Z"
+slug: "lke_20210630"
+keywords: "pig"
+categories:
+- java
+
+tags:
+- java
+---
+
+
 ## 시작
 <strong>모던 자바 인액션 '6장'</strong> 을 읽고 Collect, Collector, Collectors 에 대해서 정리봤다. 
 
