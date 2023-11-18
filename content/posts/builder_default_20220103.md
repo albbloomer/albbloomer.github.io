@@ -4,7 +4,7 @@ title: "Builder Pattern - @Builder error : Final, @Builder.default (초기화, @
 cover: "../images/스크린샷 2023-11-18 오후 7.43.35.png"
 description: "this is a description"
 date: "2022-01-03T22:31:00Z"
-slug: "solid_20220501"
+slug: "builder_default_20220103"
 keywords: "pig"
 categories:
 - spring
