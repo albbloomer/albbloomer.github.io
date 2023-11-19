@@ -4,7 +4,7 @@ title: "Collect, Collector, Collectors 정리"
 cover: "../images/스크린샷 2023-11-18 오후 7.15.10.png"
 description: "this is a description"
 date: "2022-03-03T22:31:00Z"
-slug: "lke_20210630"
+slug: "collector_20220303"
 keywords: "pig"
 categories:
 - java
