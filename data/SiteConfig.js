@@ -72,8 +72,8 @@ const config = {
       url: "https://www.notion.so/8032de545ddd4533aa934a1e058cdcec",
     },
     {
-      label: "Yul Blog",
-      url: "https://albbloomer.github.io/",
+      label: "Yul GitHub",
+      url: "https://github.com/albbloomer",
     }
   ],
   // Use for user info
