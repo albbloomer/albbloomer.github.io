@@ -116,8 +116,8 @@ const config = {
   // Use for navigation
   navTitle: "바라보는 세상에 대한 시선은 다르다.",
   navLinks: [
-    { label: "about", url: "/about" },
-    { label: "contact", url: "/contact" },
+    { label: "소개", url: "/about" },
+    // { label: "contact", url: "/contact" },
   ],
   // Use for footer
   socialLinks: [
@@ -135,7 +135,7 @@ const config = {
   footerLinks: [
     { label: "Home", url: "/" },
     { label: "About", url: "/about" },
-    { label: "Contact", url: "/contact" },
+    // { label: "Contact", url: "/contact" },
   ],
   copyright:
     "©Yul, Built with Gatsby-blog-template",
