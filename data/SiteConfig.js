@@ -1,12 +1,12 @@
 const config = {
   // Site info
   siteTitle: "율로그", // Site title.
-  siteTitleShort: "GB Template", // Short site title for homescreen (PWA). Preferably should be under 12 characters to prevent truncation.
-  siteTitleAlt: "Gatsby Blog Template", // Alternative site title for SEO.
-  siteLogo: "/logos/logo-1024x1024.png", // Logo used for SEO and manifest.
+  siteTitleShort: "Yul Blog", // Short site title for homescreen (PWA). Preferably should be under 12 characters to prevent truncation.
+  siteTitleAlt: "Yul Blog", // Alternative site title for SEO.
+  siteLogo: "/logos/스크린샷 2023-08-14 오후 5.15.40.png", // Logo used for SEO and manifest.
   siteUrl: "https://gb-template.netlify.com", // Domain of your website without pathPrefix.
   pathPrefix: "", // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
-  siteDescription: "A GatsbyJS Blog Template for blogging purpose.", // Website description used for RSS feeds/meta description tag.
+  siteDescription: "백엔드 개발자 율 블로그", // Website description used for RSS feeds/meta description tag.
   siteRss: "/rss.xml", // Path to the RSS file.
   siteLang: "en",
   siteFBAppID: "399626517562189", // FB Application ID for using app insights
