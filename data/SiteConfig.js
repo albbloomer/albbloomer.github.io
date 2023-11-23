@@ -70,6 +70,11 @@ const config = {
     {
       label: "Yul Portfolio",
       url: "https://www.notion.so/8032de545ddd4533aa934a1e058cdcec",
+
+    },
+    {
+      label: "Yul LinkedIn",
+      url: "https://www.linkedin.com/in/yul-min",
     },
     {
       label: "Yul GitHub",
@@ -128,7 +133,7 @@ const config = {
     },
     {
       label: "Linkedin",
-      url: "",
+      url: "https://www.linkedin.com/in/yul-min/",
       iconClassName: "fab linkedin-in",
     }
   ],
