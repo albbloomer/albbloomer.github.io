@@ -4,7 +4,7 @@ title: "redis 구성 - 단일, 레플리케이션, 센티넬"
 cover: "../images/infra/클러스터.png"
 description: "this is a description"
 date: "2023-11-24T22:31:00Z"
-slug: "cache_local_global_20230523"
+slug: "Redis_infra_20231124"
 keywords: "pig"
 categories:
 - redis
