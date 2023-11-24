@@ -122,7 +122,7 @@ const config = {
   navTitle: "바라보는 세상에 대한 시선은 다르다.",
   navLinks: [
     { label: "소개", url: "/about" },
-    // { label: "contact", url: "/contact" },
+    { label: "게시물", url: "/" },
   ],
   // Use for footer
   socialLinks: [

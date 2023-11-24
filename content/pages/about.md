@@ -1,6 +1,6 @@
 ---
 template: "page"
-title: "About"
+title: "율로그"
 description: "This is a description on About"
 slug: "about"
 ---
