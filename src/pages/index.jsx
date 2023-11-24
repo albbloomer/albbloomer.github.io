@@ -50,7 +50,7 @@ class Index extends React.Component {
     );
 
     const headerTitle = config.homeHeader
-      ? `${config.siteTitle} - ${config.homeHeader}`
+      ? `${config.siteTitle}`
       : `${config.siteTitle}`;
 
     return (
