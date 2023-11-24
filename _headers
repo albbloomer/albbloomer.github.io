@@ -447,3 +447,13 @@
   Link: </component---src-templates-category-template-jsx-b63b49847ce0d249fa72.js>; rel=preload; as=script
   Link: </page-data/app-data.json>; rel=preload; as=fetch; crossorigin
   Link: </page-data/category/redis/page-data.json>; rel=preload; as=fetch; crossorigin
+/redisinfra20231124/
+  Link: </webpack-runtime-744ffff2e0fa63163091.js>; rel=preload; as=script
+  Link: </framework-6f3fdb5168e876dea49e.js>; rel=preload; as=script
+  Link: </app-812414f518b04087da26.js>; rel=preload; as=script
+  Link: </cb1608f2-c0ce4c6af0d0a63f69ae.js>; rel=preload; as=script
+  Link: </a9a7754c-4dc2ede88ccc68eff881.js>; rel=preload; as=script
+  Link: </commons-dab49a96db354f6aa1a7.js>; rel=preload; as=script
+  Link: </component---src-templates-post-template-jsx-842105aebc8e1b304159.js>; rel=preload; as=script
+  Link: </page-data/app-data.json>; rel=preload; as=fetch; crossorigin
+  Link: </page-data/redisinfra20231124/page-data.json>; rel=preload; as=fetch; crossorigin
