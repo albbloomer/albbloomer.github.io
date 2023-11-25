@@ -3,6 +3,7 @@
 <url> <loc>https://gb-template.netlify.com/redisinfra20231124/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://gb-template.netlify.com/docker20231113/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://gb-template.netlify.com/crawl20231020/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://gb-template.netlify.com/cacheloop20230524/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://gb-template.netlify.com/cachelocalglobal20230523/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://gb-template.netlify.com/solid20220501/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://gb-template.netlify.com/jpa120220421/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
