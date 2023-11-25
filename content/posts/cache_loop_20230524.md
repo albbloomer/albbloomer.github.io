@@ -22,6 +22,8 @@ TTL 을 통해서 시간이 지나 데이터가 삭제되고 또 다른 호출�
 
 데이터파이프라인 같은 경우, 레디스와 연동하여 상호 작용으로 데이터를 주기적으로 업데이트해줄 수 있고 이번 블로그에 글을 쓰는 부분은 어플리케이션단에서 Local 데이터 업데이트에 대한 부분을 글로 써 내려갈 예정이다.
 
+<br>
+
 ## 스프링 프레임워크에서 제공하는 캐싱관련 어노테이션에 대해 알아보자.
 
 <img src="../images/spring/캐시업데이트.png" style="display: block; margin: auto; width: 70%;" alt=""/>
@@ -38,5 +40,172 @@ TTL 을 통해서 시간이 지나 데이터가 삭제되고 또 다른 호출�
 
 
 <img src="../images/spring/캐시업데이트아키텍처.png" style="display: block; margin: auto; width: 70%;" alt=""/>
+ 그림을 보면 첫 호출을 통해  @Cacheable 을 이용하여 JVM 에 캐싱처리를 하고 있다. 만약 이게 TTL 이 걸려있으면 히트를 치지 못하고
+DB에서 다시 데이터를 가져와서 JVM에 저장한다. 
 
-## 코드로 알아보자.
+ 또한, @CachePut 을 이용하여 주기적으로 DB에서 데이터를 가져와서 데이터를 갱신시켜준다.  
+
+
+<br>
+
+## 아키텍처와 코드로 알아보자.
+
+<img src="../images/spring/캐시업데이트아키텍처2.png" style="display: block; margin: auto; width: 70%;" alt=""/>
+
+```java
+@Slf4j
+@Service
+@RequiredArgsConstructor
+@CacheConfig(cacheNames = TempEhcacheConfig.TEMP_STORE_BOOK, cacheManager = CacheManagerType.EHCACHE)
+public class TempCacheService implements RefreshableService.Per30seconds {
+
+    @Override
+    @CachePut(key = TempEhcacheConfig.TEMP_STORE_BOOK_, unless = "#result == null")
+    public TempResponse refresh() {
+        try {
+            // return getTempData();
+        } catch(Exception e) {
+            log.error("There is an error `{}.refresh()` processing : {}", this.getClass().getName(), e.getMessage(), e);
+            return null;
+        }
+    }
+
+    @Cacheable(key = TempEhcacheConfig.TEMP_STORE_BOOK_, unless = "#result == null")
+    public TempResponse getTempData(){
+        // return Dao Response
+    }
+    
+}
+```
+
+```java
+public interface TempEhcacheConfig {
+
+    String TEMP_STORE = "TEMP:CACHE:STORE:";
+    String TEMP_STORE_BOOK = TEMP_STORE + "BOOK";
+    String TEMP_STORE_BOOK_ = "'" + TEMP_STORE_BOOK + "'";
+
+    default void addTempStoreCache(final net.sf.ehcache.config.Configuration config) {
+        config.addCache(tempStoreCache());
+        config.addCache(tempStoreCacheWithTTL());
+
+    }
+
+    private CacheConfiguration tempStoreCache() {
+        return CacheConfigurationFactory.createWithTTL(TEMP_STORE_BOOK, 200L, 100);
+    }
+
+    private CacheConfiguration tempStoreCacheWithTTL() {
+        return CacheConfigurationFactory.createWithTTL(TEMP_STORE_BOOK, 200L, 100);
+    }
+}
+```
+
+```java
+@Slf4j
+@Configuration
+@EnableCaching(proxyTargetClass = true)
+public class EhCacheCachingManagerConfig implements
+        CachingConfigurer,
+        TempEhcacheConfig,
+        NewsEhcacheConfig {
+
+    // 모듈 캐시 기본 설정
+    private static final Boolean moduleCacheCacheEternal = true;
+    private static final String moduleCacheEvictionPolicy = "LFU";
+    private static final Long moduleCacheMaxEntriesLocalHeap = 500L;
+
+    /**
+     * 캐시 등록
+     * @return CacheManager
+     */
+    @Bean(name = "ehCacheSettingManager", destroyMethod = "shutdown")
+    public net.sf.ehcache.CacheManager ehCacheManager() {
+        net.sf.ehcache.config.Configuration config = new net.sf.ehcache.config.Configuration();
+        addTempStoreCache(config);
+        addNewsCache(config);
+        return net.sf.ehcache.CacheManager.newInstance(config);
+    }
+
+    @Bean(name = CacheManagerType.EHCACHE)
+    @Override
+    public org.springframework.cache.CacheManager cacheManager() {
+        return new EhCacheCacheManager(ehCacheManager());
+    }
+
+    @Override
+    public CacheResolver cacheResolver() {
+        return new SimpleCacheResolver(cacheManager());
+    }
+
+    @Override
+    public KeyGenerator keyGenerator() {
+        return new SimpleKeyGenerator();
+    }
+
+    @Override
+    public CacheErrorHandler errorHandler() {
+        return new SimpleCacheErrorHandler();
+    }
+
+    /**
+     * 모듈 캐시 기본 설정을 적용하는 메소드
+     * @param name 캐시명
+     * @return CacheConfiguration
+     */
+    static CacheConfiguration getDefaultModuleCacheConfiguration(final String name) {
+        CacheConfiguration cacheConfiguration = new CacheConfiguration();
+        cacheConfiguration.setName(name);
+        cacheConfiguration.setEternal(moduleCacheCacheEternal);
+        cacheConfiguration.setMemoryStoreEvictionPolicy(moduleCacheEvictionPolicy);
+        cacheConfiguration.setMaxEntriesLocalHeap(moduleCacheMaxEntriesLocalHeap);
+        return cacheConfiguration;
+    }
+}
+```
+
+```java
+@Slf4j
+@Component
+@RequiredArgsConstructor
+public class RefreshableCacheScheduler implements ApplicationListener<ApplicationReadyEvent> {
+
+    private final Environment environment;
+
+    private final List<RefreshableService.Per30seconds> refreshableServicePer30sList;
+    private final List<RefreshableService.Per60seconds> refreshableServicePer60sList;
+
+    @Override
+    public void onApplicationEvent(ApplicationReadyEvent event) {
+        try {
+            refreshPer60s();
+            refreshPer30s();
+        } catch (Exception e) {
+            if (!environment.acceptsProfiles(Profiles.of(SystemMode.LOCAL, SystemMode.LOCAL_API))) {
+                throw e;
+            }
+        }
+    }
+
+    @Scheduled(cron = "0/30 * * * * *")
+    public void refreshPer30s() {
+        for (RefreshableService.Per30seconds service : refreshableServicePer30sList) {
+            try {
+                service.refresh();
+            } catch (Exception e) {
+                log.error("{} per 30 seconds service refresh failure!", service, e);
+            }
+        }
+    }
+
+    @Scheduled(cron = "0/60 * * * * *")
+    public void refreshPer60s() {
+        for (RefreshableService.Per60seconds service : refreshableServicePer60sList) {
+            try {
+                service.refresh();
+            } catch (Exception e) {
+                log.error("{} per 60 seconds service refresh failure!", service, e);
+            }
+        }
+    }
+```
