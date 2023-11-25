@@ -1,7 +1,7 @@
 ---
 template: "post"
 title: "[2] 서비스 캐싱 - 데이터 업데이트"
-cover: "../images/spring/캐시업데이트아키텍처.png"
+cover: "../images/spring/캐시업데이트아키텍처3.png"
 description: "this is a description"
 date: "2023-05-24T22:31:00Z"
 slug: "cache_loop_20230524"
@@ -50,7 +50,7 @@ DB에서 다시 데이터를 가져와서 JVM에 저장한다.
 
 ## 아키텍처와 코드로 알아보자.
 
-<img src="../images/spring/캐시업데이트아키텍처2.png" style="display: block; margin: auto; width: 70%;" alt=""/>
+<img src="../images/spring/캐시업데이트아키텍처3.png" style="display: block; margin: auto; width: 100%;" alt=""/>
 
 ```java
 @Slf4j
