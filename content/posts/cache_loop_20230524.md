@@ -52,6 +52,8 @@ DB에서 다시 데이터를 가져와서 JVM에 저장한다.
 
 <img src="../images/spring/캐시업데이트아키텍처3.png" style="display: block; margin: auto; width: 100%;" alt=""/>
 
+위의 아키텍처는 어플리케이션 상의 코드를 이해하기 쉽게 도식화한 것이다.  
+
 ```java
 @Slf4j
 @Service
@@ -77,6 +79,10 @@ public class TempCacheService implements RefreshableService.Per30seconds {
     
 }
 ```
+다른 비지니스 서비스 계층에서 **`@Cacheable`** 이 붙어있는 getTempDate() 를 호출한다. 첫 호출했을 경우, 캐싱이 되고 호출을 안하더라도 어플리케이션이 띄워지고
+주기적으로 스케줄링으로 인해 **`@CachePut`** 이 호출되고 업데이트 및 삽입이 된다.
+**`@CacheConfig`** 를 통해 클래스 레벨에서 전체적으로 설정을 해줬다. 
+
 
 ```java
 public interface TempEhcacheConfig {
@@ -100,6 +106,10 @@ public interface TempEhcacheConfig {
     }
 }
 ```
+예시를 들기위해 TempEhcacheConfig 라고 했지만 각 도메인 및 서비스에 필요한 캐싱이 필요할 때, 추가로 확장해주면 된다. 예를 들어, TempEhcacheConfig 가 아니라
+CookEhcacheConfig 처럼 확장있게 추가해주면 된다. 추가된 EhcacheConfig 는 밑 아래 코드의 EhCacheCachingManagerConfig 에 구현으로 추가하여 확장성을 늘릴 수 있다.
+
+
 
 ```java
 @Slf4j
@@ -163,6 +173,15 @@ public class EhCacheCachingManagerConfig implements
     }
 }
 ```
+위에 글을 쓴 것 처럼 추가한 각각의 인터페이스를 다중 구현하여 확장할 수 있고 각 인터페이스의 디폴트 메소드로 구현한 로직을 **`ehCacheManager`** 에 추가할 수 있다.
+( **`ehCacheManager`** 는 캐시의 생명주기를 관리하고 여러 캐시를 보유할 수 있다. )
+ 즉, 확장성과 유지보수성에 좋은 코드라고 생각할 수 있다.
+
+1. **cacheResolver()**: 캐시 해석 로직을 제공한다. 특정 캐시 작업에 사용할 캐시를 결정하는 데 사용된다.
+2. **keyGenerator()**: 캐시 키 생성 로직을 제공한다. 캐시할 때 사용될 키를 생성하는 기본 키 생성기를 반환함.
+3. **errorHandler()**: 캐시 작업 중 발생할 수 있는 오류를 처리하는 로직을 제공한다. 캐시 관련 오류를 처리하는 기본 오류 핸들러를 반환.
+4. **getDefaultModuleCacheConfiguration()**: 모듈 캐시의 기본 구성을 설정. 캐시 이름, 영속성, 메모리 저장소 추방 정책, 힙 내 최대 항목 수 등 캐시의 기본 설정을 구성함.
+
 
 ```java
 @Slf4j
@@ -208,4 +227,8 @@ public class RefreshableCacheScheduler implements ApplicationListener<Applicatio
             }
         }
     }
+}
 ```
+
+**`private final List<RefreshableService.Per30seconds> refreshableServicePer30sList`** 를 통해 서브 인스턴스 Per30seconds 를 구현하여
+생성된 Bean을 전부 주입한다. 주입된 Bean 들을 순차적으로 **`@Scheduled`** 붙은 각 메소드에서 주입된 Bean을 순차적으로 돌려서 데이터를 업데이트한다.
