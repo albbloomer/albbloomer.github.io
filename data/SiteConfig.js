@@ -68,11 +68,6 @@ const config = {
       url: "https://www.notion.so/dc3a416b5b0a46619c61771f818d9f82",
     },
     {
-      label: "Yul Portfolio",
-      url: "https://www.notion.so/8032de545ddd4533aa934a1e058cdcec",
-
-    },
-    {
       label: "Yul LinkedIn",
       url: "https://www.linkedin.com/in/yul-min",
     },
