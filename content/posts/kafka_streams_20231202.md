@@ -1,7 +1,7 @@
 ---
 template: "post"
 title: "데이터 파이프라인 kafka streams 적용하기"
-cover: "../images/스크린샷 2023-11-18 오후 7.53.18.png"
+cover: "../images/kafkastreams/kafkastreams3.png"
 description: "this is a description"
 date: "2023-12-02T08:31:00Z"
 slug: "kafka_streams_20231202"
