@@ -23,8 +23,7 @@ slug: "about"
 
 **NAME** : 민 율
 
-**RESUME** : [이력서](https://www.notion.so/dc3a416b5b0a46619c61771f818d9f82) 
-**Portfolio** : [포트폴리오](https://www.notion.so/8032de545ddd4533aa934a1e058cdcec)
+**RESUME** : [이력서](https://www.notion.so/dc3a416b5b0a46619c61771f818d9f82)
 **LinkedIn** : [링크드인](https://www.linkedin.com/in/yul-min/)
 
 **Company** : 줌인터넷 ( 2020.12.28 ~ 현재 )
