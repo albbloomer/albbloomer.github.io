@@ -244,6 +244,27 @@ val results = windowStore.all()
 
 5초 전의 윈도우 시간들만 탐색 조건에 걸고 최신의 윈도우만 걸러주는 간단한 알고리즘 ( 시간 복잡도 N ) 정도의 탐색으로 구현하여 데이터를 추출하였다.
 
+## 왜, Window 기법에서 ****Tumbling Windows 를 선택하였는가 ?****
+
+kafka streams 에서는 여러 가지 window 기법을 제공한다. 이번 실시간 시세에 적용한 window 기법은 Tumbling windows 기법을 사용했다. 우선, 쓰지 않은 3가지 window 기법을 설명하겠다.
+
+**hopping windows**
+
+Tumbling windows 와 비슷하지만 일정 간격으로 이동이 가능하기 때문에 윈도우가 중첩될 수 있다. 예를 들어, 1초에서 3초 동안의 데이터 집계를 얻은 A 블록. 2초에서 4초 동안의 데이터 집계를 얻은 B 블록. 즉, 2초 ~ 3초 구간의 데이터가 중첩이 될 수 있다. 중복이 될 수 있으므로 실시간 시세에 적합하지 않았다.
+
+**Sliding Windows**
+
+이벤트 간의 최대 시간 간격을 기준으로 윈도우를 생성한다. 즉, 레코드의 Timestamp에 따라 윈도우가 겹치는 부분이 있을 수 있기에 실시간 시세에 적합하지 않다. 고정적인 윈도우라 할지라도.
+
+**Session Windows**
+
+Session windows 같은 경우에는 윈도우 자체가 유일하게 고정적인 부분이 아니라서 애초에 실시간 시세에 적합하지 않은 기법이였다.
+
+**Tumbling Windows**
+
+Thumbling windows 는 실시간시세에 적합했는데, 고정된 윈도우를 지원하며 중첩되는 부분이 없었기에 종목에 대한 시세 중복없이 구현을 할 수 있다.
+
+
 ## 적용 후 전체적인 파이프라인 및 결과물
 
 <img src="../images/kafkastreams/kafkastreams9.png" style="display: block; margin: auto; width: 70%;" alt=""/>
