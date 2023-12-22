@@ -270,6 +270,9 @@ Thumbling windows 는 실시간시세에 적합했는데, 고정된 윈도우를
 <img src="../images/kafkastreams/kafkastreams9.png" style="display: block; margin: auto; width: 70%;" alt=""/>
 
 <img src="../images/kafkastreams/kafkastreams10.png" style="display: block; margin: auto; width: 70%;" alt=""/>
+<video src="../images/RPReplay_Final1703204357.MP4" style="display: block; margin: auto; width: 40%;" controls>
+  Your browser does not support the video tag.
+</video>
 
 ## 완벽하지 않다. 어떤 문제가 남아있는가 ?
 
