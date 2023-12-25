@@ -1,10 +1,10 @@
 ---
 template: "post"
 title: "GenerationType.AUTO Insert into table values Error -> GenerationType.IDENTITY"
-cover: "../images/스크린샷 2023-11-18 오후 8.22.49.png"
+cover: "../images/jpa/jpa1.png"
 description: "this is a description"
-date: "2022-02-18T22:31:00Z"
-slug: "git_basic_20220218"
+date: "2021-04-04T22:31:00Z"
+slug: "generation_type_20210404"
 keywords: "pig"
 categories:
 - spring
