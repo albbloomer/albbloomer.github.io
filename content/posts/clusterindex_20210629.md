@@ -53,7 +53,7 @@ Non Cluster Index를 이해했으면 쉽게 Cluster Index를 이해할 수 있�
 
 <img src="https://images.velog.io/images/ggomjae/post/ede1d587-3185-471e-9d48-d016bb23e173/image.png" width="100%"  alt=""/>
 
-NonClusterIndex 같은 경우에는 보통 우리가 했던 GenerationType.IDENTITY를 이용하여 구현하였고 ClusterIndex 같은 경우에는 @EmbeddedId를 이용하여 구현하였다.[AUTO를 쓰지 않은 이유](https://velog.io/@ggomjae/GenerationType.IDENTITY-GenerationType.AUTO-%EC%B0%A8%EC%9D%B4)
+NonClusterIndex 같은 경우에는 보통 우리가 했던 GenerationType.IDENTITY를 이용하여 구현하였고 ClusterIndex 같은 경우에는 @EmbeddedId를 이용하여 구현하였다.[AUTO를 쓰지 않은 이유](https://albbloomer.github.io/generationtype20210404/)
 
 ## 직접 확인하기 Cluster Index vs Non Cluster Index - 2 10만개 더미데이터를 이용한 성능 확인
 
