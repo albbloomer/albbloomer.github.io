@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[율로그]]></title><description><![CDATA[백엔드 개발자 율 블로그]]></description><link>https://gb-template.netlify.com</link><image><url>https://gb-template.netlify.com/logos/logo-512x512.png</url><title>율로그</title><link>https://gb-template.netlify.com</link></image><generator>Gatsby Blog Template</generator><lastBuildDate>Sat, 30 Dec 2023 11:10:58 GMT</lastBuildDate><atom:link href="https://gb-template.netlify.com/rss.xml" rel="self" type="application/rss+xml"/><copyright><![CDATA[©Yul, Built with Gatsby-blog-template]]></copyright><item><title><![CDATA[Mysql Lock 에 대해서]]></title><description><![CDATA[…]]></description><link>https://gb-template.netlify.com/databaselock20231020/</link><guid isPermaLink="false">https://gb-template.netlify.com/databaselock20231020/</guid><category><![CDATA[mysql]]></category><pubDate>Sat, 30 Dec 2023 11:31:00 GMT</pubDate><content:encoded>&lt;p&gt;실무나 이론적인 공부를 하다보면 락에 대한 얘기는 끊임없이 나오는 것 같다. 그럴 때마다 ‘나중에 한번 제대로! 공부를 해야지’ 하고 다짐만 할 뿐, 다시 코딩을 시작한다.&lt;/p&gt;
-&lt;p&gt;이제 좀 알아보자.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[율로그]]></title><description><![CDATA[백엔드 개발자 율 블로그]]></description><link>https://gb-template.netlify.com</link><image><url>https://gb-template.netlify.com/logos/logo-512x512.png</url><title>율로그</title><link>https://gb-template.netlify.com</link></image><generator>Gatsby Blog Template</generator><lastBuildDate>Sat, 30 Dec 2023 11:16:52 GMT</lastBuildDate><atom:link href="https://gb-template.netlify.com/rss.xml" rel="self" type="application/rss+xml"/><copyright><![CDATA[©Yul, Built with Gatsby-blog-template]]></copyright><item><title><![CDATA[Mysql Lock 에 대해서]]></title><description><![CDATA[실무나 이론적인 공부를 하다보면 락에 대한 얘기는 끊임없이 나오는 것 같다. 공부를 해보자 공부하기전 선수 개념 트랜잭션 : 데이터베이스에서 실행되는 하나의 논리적 작업 단위이다. 예를 들어, 은행 계좌 이체 작업은 하나의 트랜잭션이다. ACID 원자성(Atomicity…]]></description><link>https://gb-template.netlify.com/databaselock20231020/</link><guid isPermaLink="false">https://gb-template.netlify.com/databaselock20231020/</guid><category><![CDATA[mysql]]></category><pubDate>Sat, 30 Dec 2023 11:31:00 GMT</pubDate><content:encoded>&lt;p&gt;실무나 이론적인 공부를 하다보면 락에 대한 얘기는 끊임없이 나오는 것 같다. 공부를 해보자&lt;/p&gt;
 &lt;h2 id=&quot;공부하기전-선수-개념&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B3%B5%EB%B6%80%ED%95%98%EA%B8%B0%EC%A0%84-%EC%84%A0%EC%88%98-%EA%B0%9C%EB%85%90&quot; aria-label=&quot;공부하기전 선수 개념 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;공부하기전 선수 개념&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;트랜잭션&lt;/strong&gt; : 데이터베이스에서 실행되는 하나의 논리적 작업 단위이다. 예를 들어, 은행 계좌 이체 작업은 하나의 트랜잭션이다.&lt;/p&gt;
 &lt;ul&gt;
@@ -47,7 +46,7 @@
 &lt;li&gt;Lock “잠금”&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;락-종류&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%9D%BD-%EC%A2%85%EB%A5%98&quot; aria-label=&quot;락 종류 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;락 종류&lt;/h2&gt;
-&lt;p&gt;공유 락 ( Shared Lock )&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;공유 락 ( Shared Lock )&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;데이터를 조회할 때 사용된다. Read Lock 이라고도 불리고 Shared 의 앞글자를 따서 주로 S락이라고 하기도 함.&lt;/li&gt;
 &lt;li&gt;여러 사용자가 같은 데이터를 동시에 볼 수 있지만 그 다른 사람이 1명이라도 보고 있으면 변경이 불가능하다.&lt;/li&gt;
@@ -59,7 +58,7 @@
 /static/3a0f6b0ca6a471f7dc950e15bb9055a2/7c811/rock3.png 660w,
 /static/3a0f6b0ca6a471f7dc950e15bb9055a2/00706/rock3.png 862w&quot; sizes=&quot;(max-width: 660px) 100vw, 660px&quot; style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot;&gt;
     &lt;/span&gt;
-&lt;p&gt;베타 락 ( Exclusive Lock )&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;베타 락 ( Exclusive Lock )&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;데이터를 변경할 때 사용된다. Write Lock 이라고도 불리고 X로 표기한다.&lt;/li&gt;
 &lt;li&gt;아예 베타락이 걸려있으면 Select 하는 세션이라든지 Insert 하는 세션이라든지 데이터에 접근할 수 없다.&lt;/li&gt;
@@ -71,11 +70,11 @@
 /static/358c848e3dd76c8592d024992bec3459/7c811/rock5.png 660w,
 /static/358c848e3dd76c8592d024992bec3459/a0e79/rock5.png 824w&quot; sizes=&quot;(max-width: 660px) 100vw, 660px&quot; style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot;&gt;
     &lt;/span&gt;
-&lt;p&gt;비관적 락 ( Pessimistic Lock )&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;비관적 락 ( Pessimistic Lock )&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;하나의 트랜잭션이 데이터를 읽는 시점에서 락을 걸고 조회 또는 갱신 처리가 완료 될 때까지 그 Lock 이 유지된다. 조회 때 락 잠금을 획득하는 방법은 대표적으로 Select .. For Update 이다. 즉, 조회할 때! Lock을 가져간다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;여기서 잠깐 ? 베타 락과 비관적 락의 차이점을 모르겠다. &lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;여기서 잠깐 ? 베타 락과 비관적 락의 차이점을 모르겠다. &lt;br&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;배타 락은 데이터에 대한 독점적인 접근 권한을 부여하는 특정한 락 유형이다.&lt;/li&gt;
 &lt;li&gt;비관적 락은 데이터베이스 충돌이 발생할 것을 가정하고, 이를 방지하기 위해 트랜잭션 동안 지속적으로 락을 설정하는 전략이다.&lt;/li&gt;
@@ -96,12 +95,12 @@
 &lt;/ul&gt;
 &lt;h2 id=&quot;락-범위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%9D%BD-%EB%B2%94%EC%9C%84&quot; aria-label=&quot;락 범위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;락 범위&lt;/h2&gt;
 &lt;p&gt;어떠한 데이터에 트랜잭션이 실행했을 때, 접근제한의 범위는 어디까지 일까?&lt;/p&gt;
-&lt;p&gt;데이터베이스 : DB 의 소프트웨어 버전을 업그레드 하거나 DB 업데이트를 진행할 경우&lt;/p&gt;
-&lt;p&gt;파일&lt;/p&gt;
-&lt;p&gt;테이블 : DDL ( create, alter, drop ) 할 때 주로 쓰며 DDL Lock 이라고 한다.&lt;/p&gt;
-&lt;p&gt;페이지와 블럭&lt;/p&gt;
-&lt;p&gt;컬럼&lt;/p&gt;
-&lt;p&gt;행&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;데이터베이스&lt;/strong&gt; : DB 의 소프트웨어 버전을 업그레드 하거나 DB 업데이트를 진행할 경우&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;파일&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;테이블&lt;/strong&gt; : DDL ( create, alter, drop ) 할 때 주로 쓰며 DDL Lock 이라고 한다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;페이지와 블럭&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;컬럼&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;행&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&quot;해결-방법&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95&quot; aria-label=&quot;해결 방법 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;해결 방법&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;각각의 트랜잭션이 빠르게 실행되도록 해야한다.&lt;/li&gt;
