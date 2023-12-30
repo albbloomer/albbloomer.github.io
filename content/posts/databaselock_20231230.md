@@ -1,7 +1,7 @@
 ---
 template: "post"
 title: "Mysql Lock 에 대해서"
-cover: "../images/spring/스크린샷 2023-11-22 오후 7.31.44.png"
+cover: "../images/db/rock1.png"
 description: "this is a description"
 date: "2023-12-30T11:31:00Z"
 slug: "databaselock_20231020"
